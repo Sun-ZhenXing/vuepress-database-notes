@@ -2,45 +2,22 @@
 home: true
 heroImage: /favicon.svg
 actions:
-  - text: Get Start
-    link: /demo/
+  - text: 开始阅读
+    link: /database/
     type: primary
-  - text: Configure
-    link: https://v2.vuepress.vuejs.org/guide/
-    type: secondary
 features:
-  - title: Zero configuration
-    details: Out of the box, contract is configuration.
-  - title: Fully functional plugins
-    details: Various plugins have been configured to support LaTeX and other common requirements.
   - title: VuePress
-    details: All of them are the latest support. Plugins can be added or removed at any time. Native themes and ecosystem.
-footer: Create from VuePress community!
+    details: 本项目是 VuePress 文档计划的一个子项目，VuePress 文档计划致力于将各种自由知识提炼为更加现代化的文档。
+footer: 数据库笔记合集，由 @Sun-ZhenXing 创建
 ---
 
-# Hello VuePress
+# 数据库笔记合集
 
-$$
-\LaTeX
-$$
+## [数据库系统概论](./database/)
 
-::: info Welcome!
+## [MySQL 笔记合集](./mysql/)
 
-All of VuePress2 is ready!
+1. [MySQL 基础](./mysql/basic/)
+2. [MySQL 管理](./mysql/manage/)
+3. [MySQL 进阶](./mysql/advanced/)
 
-:::
-
-::: warning
-
-Solid is not Solid.js!
-
-:::
-
-```cpp
-#include <iostream>
-
-int main(int argc, char** argv) {
-    std::cout << "Hello World!" << std::endl;
-    return 0;
-}
-```

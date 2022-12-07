@@ -4,12 +4,12 @@ import { copyCodePlugin } from 'vuepress-plugin-copy-code2'
 import { searchProPlugin } from 'vuepress-plugin-search-pro'
 
 const USER_NAME = 'Sun-ZhenXing'
-const BASE_PATH = '/vuepress-solid-template/'
+const BASE_PATH = '/vuepress-database-notes/'
 
 export default defineUserConfig({
-  lang: 'en-US',
-  title: 'Vuepress Solid Template',
-  description: 'Best Vuepress Template',
+  lang: 'zh-CN',
+  title: '数据库笔记合集',
+  description: '各种数据库和 SQL 笔记',
   head: [
     ['link', { rel: 'icon', href: `${BASE_PATH}favicon.svg` }]
   ],
@@ -24,22 +24,40 @@ export default defineUserConfig({
     repo: `${USER_NAME}${BASE_PATH}`,
     navbar: [
       {
-        text: 'Demo for Vuepress Solid',
+        text: '数据库系统概论',
         children: [
           {
-            text: 'Vuepress Solid Template',
-            link: '/demo/'
+            text: '数据库系统概论',
+            link: '/database/'
           }
         ]
       }
     ],
     sidebar: {
-      '/demo/': [
+      '/database/': [
         {
-          text: 'Demo',
+          text: '数据库系统概论',
           children: [
-            '/demo/page01.md',
-            '/demo/page02.md',
+            '/database/',
+          ]
+        }
+      ],
+      '/mysql/': [
+        {
+          text: 'MySQL',
+          children: [
+            {
+              text: 'MySQL 基础',
+              link: '/mysql/basic/'
+            },
+            {
+              text: 'MySQL 管理',
+              link: '/mysql/manage/'
+            },
+            {
+              text: 'MySQL 进阶',
+              link: '/mysql/advanced/'
+            },
           ]
         }
       ]
