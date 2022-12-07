@@ -22,6 +22,9 @@ export default defineUserConfig({
   theme: defaultTheme({
     logo: '/favicon.svg',
     repo: `${USER_NAME}${BASE_PATH}`,
+    editLinkText: '在 GitHub 上编辑此页',
+    contributorsText: '贡献者',
+    lastUpdatedText: '上次更新',
     navbar: [
       {
         text: '数据库系统概论',
@@ -29,6 +32,10 @@ export default defineUserConfig({
           {
             text: '数据库系统概论',
             link: '/database/'
+          },
+          {
+            text: 'MySQL 笔记',
+            link: '/mysql/'
           }
         ]
       }

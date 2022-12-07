@@ -23,9 +23,7 @@ description: 进阶 MySQL
 
 ## 2.6 MySQL 窗口函数
 
-::: warning
-
-**支持性警告**
+::: warning 支持性警告
 
 MySQL 8.0 新增功能，请确保你的 MySQL 或其他 SQL 环境支持窗口函数。
 
@@ -168,8 +166,6 @@ from Scores;
 ```
 
 :::
-
-
 
 ## 2.7 MySQL 其他函数
 
