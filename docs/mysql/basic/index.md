@@ -172,7 +172,7 @@ SHOW DATABASES;
 | `timestamp` | 时间戳                                 |
 | `year`      | 年                                     |
 
-`NULL` 类型为空值，如果需要比较请使用 `IS NULL` 而不是 `= NULL`，`NULL` 参与的运算结果也为 `NULL` 。
+`NULL` 类型为空值，如果需要比较请使用 `IS NULL` 而不是 `= NULL`，`NULL` 参与的运算结果也为 `NULL`。
 
 ## 2.3 数据库的字段属性
 
@@ -542,7 +542,7 @@ insert into `subject`(`subjectno`, `subjectname`, `classhour`, `gradeid`) values
     (17, 'C#基础', 130, 1);
 ```
 
-上面的数据仅为示例，可以根据实际情况生成或者 Mock 。
+上面的数据仅为示例，可以根据实际情况生成或者 Mock。
 
 ## 4.1 基本查询
 
@@ -624,7 +624,7 @@ SELECT * FROM result WHERE NOT studentno = 1000;
 | `LIKE`        | 匹配     |
 | `IN`          | 在集合内 |
 
-模糊查询中的 `%` 相当于任意字符，相当于通配符 `*`，`_` 匹配一个字符，相当于通配符 `?` 。
+模糊查询中的 `%` 相当于任意字符，相当于通配符 `*`，`_` 匹配一个字符，相当于通配符 `?`。
 
 查询张姓同学：
 
@@ -1190,7 +1190,7 @@ CREATE INDEX id_app_user ON app_user(`name`);
 - Hash 索引：查询单条快，范围查询慢
 - BTree 索引：B+ 树，层数越多，数据量指数级增长
 
-InnoDB 默认的索引类型是 BTree 。
+InnoDB 默认的索引类型是 BTree。
 
 不同的存储引擎支持的索引类型也不一样：
 - InnoDB 支持事务，支持行级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引
@@ -1201,7 +1201,7 @@ InnoDB 默认的索引类型是 BTree 。
 
 ::: tip
 
-推荐阅读：[MySQL 索引原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html) 。
+推荐阅读：[MySQL 索引原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)。
 
 :::
 
@@ -1360,7 +1360,7 @@ Sun 公司为了简化数据库的开发操作，提供了一个 Java 操作数�
 
 对于开发人员来说，我们只需要掌握 JDBC 接口操作即可。
 
-除了需要 JDBC 的包，我们还需要 MySQL 数据库驱动包：`mysql-connector-java-5.1.47.jar` 。
+除了需要 JDBC 的包，我们还需要 MySQL 数据库驱动包：`mysql-connector-java-5.1.47.jar`。
 
 ## 10.2 第一个 JDBC 程序
 

@@ -128,7 +128,7 @@ mysql.server start
 
 修改前关闭 MySQL 服务，可参考 [上一节](#_1-1-关闭-mysql-服务)。
 
-修改 `my.cnf`（可能是 `/etc/my.cnf` 或 `/etc/mysql/my.cnf`），在 `[mysqld]` 后添加 `skip-grant-tables` 。
+修改 `my.cnf`（可能是 `/etc/my.cnf` 或 `/etc/mysql/my.cnf`），在 `[mysqld]` 后添加 `skip-grant-tables`。
 
 如果没有选项 `[mysqld]`，添加 `[mysqld]` 到配置文件中，并保存。
 
@@ -172,7 +172,7 @@ mysql.server restart
 mysql -u root
 ```
 
-下面跳转到 [执行 SQL 语句](#_1-3-执行-sql-语句)，执行上述 SQL 。
+下面跳转到 [执行 SQL 语句](#_1-3-执行-sql-语句)，执行上述 SQL。
 
 ### 2.4 修改回原配置
 
