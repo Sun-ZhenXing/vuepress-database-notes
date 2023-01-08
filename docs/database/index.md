@@ -5,8 +5,6 @@ description: 数据库系统概论笔记
 
 本文是 [*拯救者：数据库系统概论速成*](https://www.bilibili.com/video/BV1jf4y147jz/) 课程笔记，另外文末还包含实验题的 SQL，测试试卷和答案。
 
-<!-- more -->
-
 # 1. 绪论
 
 1. 了解数据库的四个基本概念

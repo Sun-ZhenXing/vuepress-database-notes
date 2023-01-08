@@ -11,8 +11,6 @@ tags:
 
 本文是 [*狂神说 Java：MySQL 最新教程通俗易懂*](https://www.bilibili.com/video/BV1NJ411J79W) 的课程笔记。本文的 MySQL 学习是业务层面的 MySQL，运维级别的 MySQL 可以参考更多更深入的资料。
 
-<!-- more -->
-
 ::: tip
 
 作者的文档可以在微信公众号查看，[作者的文档](http://mp.weixin.qq.com/mp/homepage?__biz=Mzg2NTAzMTExNg==&hid=4&sn=044c8767bd3c1825a329c2b98fff2ffe) 也可以参考。
