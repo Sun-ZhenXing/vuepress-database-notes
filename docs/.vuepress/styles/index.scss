@@ -1,7 +1,8 @@
-// fix: code block overflow of md-enhance in default theme
-@media (max-width: 419px) {
-  .theme-default-content {
-    .hint-container div[class*=language-] {
+.theme-default-content {
+
+  // fix: code block overflow of md-enhance in default theme
+  @media (max-width: 419px) {
+    div.hint-container div[class*=language-] {
       margin: 0.85rem -1rem;
     }
 
@@ -9,35 +10,29 @@
       margin: 0.85rem -0.8rem;
     }
   }
-}
 
-// optimize: code
-code {
-  padding: 0.25rem 0.15rem;
-}
-
-// optimize: print style
-@media print {
-  :root {
-    --c-text: #000;
+  // optimize: code
+  code {
+    padding: 0.25rem 0.15rem;
   }
 
-  main.page {
-    padding: 0;
+  p {
+
+    // optimize: image center
+    >img {
+      display: block;
+      margin: 0 auto;
+    }
+
+    // optimize: image link icon
+    >a>img+span {
+      display: none;
+    }
   }
 
-  header {
-    display: none;
-  }
-
-  // fix: details will hide when print
-  details[open].hint-container.details {
-    display: block !important;
-  }
-
-  // fix: katex will hide when overflow
-  .katex-display>.katex {
-    white-space: pre-wrap !important;
+  // optimize: badge
+  .badge {
+    vertical-align: inherit;
   }
 }
 
@@ -51,3 +46,5 @@ code {
     user-select: all;
   }
 }
+
+@import 'print.scss';

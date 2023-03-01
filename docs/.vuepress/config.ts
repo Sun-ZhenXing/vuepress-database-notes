@@ -91,7 +91,7 @@ export default defineUserConfig({
       katex: true,
       mermaid: true,
       delay: 200,
-    }),
+    }, false),
     searchProPlugin({}),
     autoCatalogPlugin({}),
     copyCodePlugin({
