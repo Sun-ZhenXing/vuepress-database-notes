@@ -5,6 +5,8 @@ description: UUID 相关函数
 
 # UUID
 
+[[TOC]]
+
 ## 1. UUID 函数
 
 `UUID()` 返回一个 UUID 字符串：
