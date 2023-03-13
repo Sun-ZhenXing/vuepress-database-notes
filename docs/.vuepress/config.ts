@@ -27,50 +27,8 @@ export default defineUserConfig({
     editLinkText: '在 GitHub 上编辑此页',
     contributorsText: '贡献者',
     lastUpdatedText: '上次更新',
-    navbar: [
-      {
-        text: '数据库系统概论',
-        children: [
-          {
-            text: '数据库系统概论',
-            link: '/database/'
-          },
-          {
-            text: 'MySQL 笔记',
-            link: '/mysql/'
-          }
-        ]
-      }
-    ],
-    sidebar: {
-      '/database/': [
-        {
-          text: '数据库系统概论',
-          children: [
-            '/database/',
-          ]
-        }
-      ],
-      '/mysql/': [
-        {
-          text: 'MySQL',
-          children: [
-            {
-              text: 'MySQL 基础',
-              link: '/mysql/basic/'
-            },
-            {
-              text: 'MySQL 管理',
-              link: '/mysql/manage/'
-            },
-            {
-              text: 'MySQL 进阶',
-              link: '/mysql/advanced/'
-            },
-          ]
-        }
-      ]
-    }
+    navbar: [],
+    sidebar: 'auto',
   }),
   plugins: [
     mdEnhancePlugin({
