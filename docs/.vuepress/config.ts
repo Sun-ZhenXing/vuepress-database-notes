@@ -49,6 +49,38 @@ export default defineUserConfig({
       katex: true,
       mermaid: true,
       delay: 200,
+      stylize: [
+        {
+          matcher: '@def',
+          replacer: ({ tag }) => {
+            if (tag === 'em') return {
+              tag: 'Badge',
+              attrs: { type: 'tip' },
+              content: '定义'
+            }
+          }
+        },
+        {
+          matcher: /@note:.+/,
+          replacer: ({ tag, content }) => {
+            if (tag === 'em') return {
+              tag: 'Badge',
+              attrs: { type: 'warning' },
+              content: content.substring(6)
+            }
+          }
+        },
+        {
+          matcher: '@TODO',
+          replacer: ({ tag }) => {
+            if (tag === 'em') return {
+              tag: 'Badge',
+              attrs: { type: 'danger' },
+              content: 'TODO'
+            }
+          }
+        }
+      ]
     }, false),
     searchProPlugin({}),
     autoCatalogPlugin({}),
