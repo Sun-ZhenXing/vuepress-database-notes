@@ -1,8 +1,3 @@
----
-title: MySQL 进阶
-description: 进阶 MySQL
----
-
 本文是 MySQL 的高阶教程，讲解关于 MySQL 高阶和底层的知识。本文的章节没有特别的联系，可以参考阅读。
 
 1. [UUID 相关函数](./uuid.md)

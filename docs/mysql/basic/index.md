@@ -1,13 +1,4 @@
----
-title: MySQL 学习笔记
-date: 2022-05-23 20:46:43
-categories:
-  - [数据库, MySQL]
-tags:
-  - 数据库
-  - SQL
-  - MySQL
----
+# MySQL 学习笔记
 
 本文是 [*狂神说 Java：MySQL 最新教程通俗易懂*](https://www.bilibili.com/video/BV1NJ411J79W) 的课程笔记。本文的 MySQL 学习是业务层面的 MySQL，运维级别的 MySQL 可以参考更多更深入的资料。
 
@@ -17,7 +8,7 @@ tags:
 
 :::
 
-# 1. MySQL 基本操作
+## 1. MySQL 基本操作
 
 在 Windows 上启动和关闭 MySQL 服务（需要管理员）：
 
@@ -96,15 +87,17 @@ MySQL 关键字不分大小写。
 ```
 
 创建数据表常规配置：
+
 - 引擎：`InnoDB`
 - 字符集：`utf8`
 - 排序：`utf8_general_ci`
 
-# 2. 操作数据库的语句
+## 2. 操作数据库的语句
 
-## 2.1 操作数据库
+### 2.1 操作数据库
 
 MySQL 的数据库语言分为四大类：
+
 - DDL：数据定义语言
 - DML：数据操作语言
 - DQL：数据查询语言
@@ -140,7 +133,7 @@ USE `mydata`;
 SHOW DATABASES;
 ```
 
-## 2.2 数据库的列类型
+### 2.2 数据库的列类型
 
 下面举例常见的类型：
 
@@ -172,7 +165,7 @@ SHOW DATABASES;
 
 `NULL` 类型为空值，如果需要比较请使用 `IS NULL` 而不是 `= NULL`，`NULL` 参与的运算结果也为 `NULL`。
 
-## 2.3 数据库的字段属性
+### 2.3 数据库的字段属性
 
 | 字段属性         | 含义       |
 | ---------------- | ---------- |
@@ -193,7 +186,7 @@ PS：一个业务型数据库必须存在的一些字段。
 | `gmt_create` | 创建时间   |
 | `gmt_update` | 修改时间   |
 
-## 2.4 创建数据库表
+### 2.4 创建数据库表
 
 建表语法：
 
@@ -220,6 +213,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 ```
 
 规则：
+
 1. 表的名称和字段名尽量使用反引号括起来
 2. 字符串尽量只使用单引号
 3. 每一行加上一个逗号（`,`），最后一行可以不加
@@ -246,9 +240,10 @@ SHOW CREATE TABLE student;
 character-set-server=utf8
 ```
 
-## 2.5 数据库引擎
+### 2.5 数据库引擎
 
 常用的有：
+
 - InnoDB
 - MyISAM
 
@@ -267,16 +262,18 @@ character-set-server=utf8
 :::
 
 比较特点：
+
 - InnoDB：安全性高，事务处理，多表多用户操作
 - MyISAM：节约空间，速度较快
 
 MySQL 的数据库信息储存在 `data` 目录下，本质还是文件存储。
 
 数据库引擎在物理文件上的区别：
+
 - InnoDB：表结构文件 `*.frm` 和上一级的 `ibdata*` 文件
 - MyISAM：表结构文件 `*.frm` 和数据文件 `*.MYD`、`*.MYI` 索引文件
 
-## 2.6 修改和删除数据表
+### 2.6 修改和删除数据表
 
 修改表的名称：
 
@@ -303,6 +300,7 @@ ALTER TABLE student CHANGE age age1 INT(1);
 ```
 
 > `MODIFY` 和 `CHANGE` 的区别：
+>
 > - `MODIFY` 不能来重命名，只能修改字段类型和约束
 > - `CHANGE` 可以用来重命名字段，但是不能修改字段类型和约束
 
@@ -320,9 +318,9 @@ DROP TABLE IF EXISTS student;
 
 > 创建的删除操作尽量加上 `IF EXISTS` 防止报错。
 
-# 3. MySQL 的数据管理
+## 3. MySQL 的数据管理
 
-## 3.1 外键
+### 3.1 外键
 
 > 删除有外键的表，必须要先删除引用的表。
 
@@ -370,11 +368,12 @@ ALTER TABLE `student`
 
 :::
 
-## 3.2 DML 语言
+### 3.2 DML 语言
 
 数据库的意义：数据存储，数据管理。
 
 DML 语言：数据操作语言。分别对应下面几个方法：
+
 - `INSERT`
 - `UPDATE`
 - `DELETE`
@@ -435,16 +434,19 @@ TRUNCATE TABLE `student`
 ```
 
 区别：
+
 - `TRUNCATE` 会将计数器清零
 - `TRUNCATE` 不会影响事务的执行
 
 `DELETE` 问题，当重启数据库时：
+
 - 对于 InnoDB，自增会从 1 开始，因为这个值存在内存中
 - 对于 MyISAM，自增不变，这个值存在于磁盘中
 
-# 4. DQL 查询数据
+## 4. DQL 查询数据
 
 DQL（Data Query Language），即数据查询语言：
+
 - 数据库最核心的语言
 - 所以的查询都使用 `SELECT` 来查询
 - 简单和复杂的查询都能写
@@ -542,7 +544,7 @@ insert into `subject`(`subjectno`, `subjectname`, `classhour`, `gradeid`) values
 
 上面的数据仅为示例，可以根据实际情况生成或者 Mock。
 
-## 4.1 基本查询
+### 4.1 基本查询
 
 查询所有字段：
 
@@ -567,7 +569,7 @@ SELECT CONCAT('姓名：', studentname) AS 新名字 FROM student;
 | 姓名：张伟 |
 | 姓名：赵强 |
 
-## 4.2 去重
+### 4.2 去重
 
 对结果去重：
 
@@ -592,6 +594,7 @@ SELECT @@auto_increment_increment;
 ```
 
 `SELECT` 可以选择的表达式包括：
+
 - 文本
 - 列
 - `NULL`
@@ -599,7 +602,7 @@ SELECT @@auto_increment_increment;
 - 计算表达式
 - 系统遍历
 
-## 4.3 Where 条件子句
+### 4.3 Where 条件子句
 
 查询成绩在 95~100 分的人：
 
@@ -613,7 +616,7 @@ SELECT * FROM result WHERE studentresult BETWEEN 95 AND 100;
 SELECT * FROM result WHERE NOT studentno = 1000;
 ```
 
-## 4.4 模糊查询
+### 4.4 模糊查询
 
 | 运算符        | 描述     |
 | ------------- | -------- |
@@ -638,7 +641,7 @@ SELECT studentno, studentname FROM student
     WHERE studentno IN (1000, 1023, 1345);
 ```
 
-## 4.5 联表查询
+### 4.5 联表查询
 
 查询参见了考试的同学（学号，姓名，科目，分数）
 
@@ -677,6 +680,7 @@ SELECT s.studentno, studentname, subjectname, studentresult
 ```
 
 分析思路：
+
 1. 分析需求，分析查询的字段来自哪些表
     - 从哪些表查询数据
     - 如果存在多张表的查询，先从两张表的查询开始
@@ -714,7 +718,7 @@ SELECT s.studentno, studentname, subjectname, studentresult
     WHERE subjectname = '数据库结构-1';
 ```
 
-## 4.6 自连接
+### 4.6 自连接
 
 自连接即自己的表的自己的表连接，逻辑上将一张表拆为两张一样的表。
 
@@ -781,7 +785,7 @@ where E1.salary > E2.salary;
 
 :::
 
-## 4.7 分页和排序
+### 4.7 分页和排序
 
 SQL `SELECT` 完整语法如下，其中各个子句的位置不能调换：
 
@@ -820,7 +824,7 @@ SELECT s.studentno, s.studentname, sub.subjectname, r.studentresult
     LIMIT 10;
 ```
 
-## 4.8 子查询
+### 4.8 子查询
 
 查询 “高等数学-4” 的所有考试结果（学科，科目编号，成绩），降序排列。
 
@@ -900,7 +904,7 @@ where salary < (select max(salary) from Employee);
 
 :::
 
-# 5. MySQL 常用函数
+## 5. MySQL 常用函数
 
 ::: tip
 
@@ -908,15 +912,17 @@ where salary < (select max(salary) from Employee);
 
 :::
 
-## 5.1 常用函数
+### 5.1 常用函数
 
 几乎各种语言常用的数学运算都存在：
+
 - `ABS(X)`
 - `RAND()`
 - `SIN(X)`
 - `CEIL(X)`
 
 还有字符串函数：
+
 - `CHAR_LENGTH('123')` 获得字符串的长度
 - `CONCAT(s1, s2)` 拼接字符串
 - `INSERT(str, pos, len, newstr)` 插入字符串
@@ -924,6 +930,7 @@ where salary < (select max(salary) from Employee);
 - `REPLACE('123456','34','abc')` 替换字符串
 
 时间日期的函数：
+
 - `CURRENT_DATE()` 当前日期
 - `CURDATE()` 和上面的函数一样
 - `LOCALTIME()` 本地时间日期
@@ -942,15 +949,17 @@ SELECT SECOND(NOW());
 ```
 
 MySQL 支持签名算法：
+
 - `MD5(str)`
 - `SHA(str)`
 
 系统函数：
+
 - `USER()` 当前用户
 - `SYSTEM_USER()` 用户名，和上面结果一致
 - `VERSION()` MySQL 版本
 
-## 5.2 聚合函数
+### 5.2 聚合函数
 
 | 函数名    | 描述   |
 | --------- | ------ |
@@ -984,17 +993,19 @@ HAVING AVG(studentresult) > 80;
 
 `HAVING` 用于过滤分组信息。
 
-# 6. 事务
+## 6. 事务
 
 事务：批量的操作，要么都成功，要么都失败。
 
 事务原则：ACID 原则
+
 - 原子性
 - 一致性
 - 隔离性
 - 持久性
 
 隔离性的问题：
+
 - 脏读：一个事务提交了，但另一个没有提交
 - 不可重复读：同一个事务内，重复读取表中的数据，表数据发生了改变
 - 虚读（幻读）：在一个事务中读到了别人插入的数据，导致前后结果不一致
@@ -1058,27 +1069,29 @@ COMMIT;
 SET autocommit = 1;
 ```
 
-# 7. 索引
+## 7. 索引
 
 > 索引是帮助 MySQL 高效获取数据的数据结构。
 
-## 7.1 索引的分类
+### 7.1 索引的分类
 
 下面列举一些常见的索引：
-- 主键索引（Primary Key）
-    - 唯一标识
-    - 主键只有一个
-- 唯一索引（Unique Key）
-    - 避免重复的列出现
-    - 可以有多个列加入唯一索引
-- 常规索引（Key / Index）
-    - 默认的
-- 全文索引（FullText）
-    - 在特定的数据库引擎下才有
 
-## 7.2 索引的使用
+- 主键索引（Primary Key）
+  - 唯一标识
+  - 主键只有一个
+- 唯一索引（Unique Key）
+  - 避免重复的列出现
+  - 可以有多个列加入唯一索引
+- 常规索引（Key / Index）
+  - 默认的
+- 全文索引（FullText）
+  - 在特定的数据库引擎下才有
+
+### 7.2 索引的使用
 
 索引使用步骤：
+
 1. 创建表时给字段增加索引
 2. 创建完毕后增加索引
 
@@ -1108,7 +1121,7 @@ EXPLAIN SELECT * FROM student
 WHERE MATCH(studentname) AGAINST('张');
 ```
 
-## 7.3 测试索引性能
+### 7.3 测试索引性能
 
 创建下面的表：
 
@@ -1176,21 +1189,24 @@ CREATE INDEX id_app_user ON app_user(`name`);
 
 索引在小数据量的时候，用处不大，但是在大数据量时区别明显。
 
-## 7.4 索引原则
+### 7.4 索引原则
 
 基本原则：
+
 - 索引不是越多越好
 - 不要对经常变动的数据加索引
 - 小数据量的表不需要加索引
 - 索引一般作用在常用来查询的字段上
 
 不同索引类型的区别：
+
 - Hash 索引：查询单条快，范围查询慢
 - BTree 索引：B+ 树，层数越多，数据量指数级增长
 
 InnoDB 默认的索引类型是 BTree。
 
 不同的存储引擎支持的索引类型也不一样：
+
 - InnoDB 支持事务，支持行级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引
 - MyISAM 不支持事务，支持表级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引
 - Memory 不支持事务，支持表级别锁定，支持 B-tree、Hash 等索引，不支持 Full-text 索引
@@ -1203,9 +1219,9 @@ InnoDB 默认的索引类型是 BTree。
 
 :::
 
-# 8. 权限管理和数据库备份
+## 8. 权限管理和数据库备份
 
-## 8.1 用户管理
+### 8.1 用户管理
 
 推荐使用数据库管理软件进行可视化管理，因为用户管理很少需要被使用，而且需要严格的操作。
 
@@ -1252,13 +1268,15 @@ REVOKE ALL PRIVILEGES ON *.* FROM Alex;
 DROP USER Alex;
 ```
 
-## 8.2 数据库备份
+### 8.2 数据库备份
 
 为什么要备份？
+
 - 保证重要的数据不丢失
 - 数据转移
 
 MySQL 数据库备份 的方式：
+
 - 拷贝物理文件
 - 可视化工具中导出
 - 使用命令行
@@ -1282,39 +1300,44 @@ SOURCE dump.sql;
 mysql -uroot -pxxxx school < dump.sql
 ```
 
-# 9. 规范数据库设计
+## 9. 规范数据库设计
 
-## 9.1 为什么设计数据库
+### 9.1 为什么设计数据库
 
 当数据库比较复杂的时候，我们需要对数据库进行设计。
 
 糟糕的数据库设计：
+
 - 数据冗余，浪费空间
 - 数据插入、删除都会麻烦（不使用物理外键）
 - 程序性能差
 
 良好的数据库设计：
+
 - 节省内存空间
 - 保证数据的完整性
 - 方便开发系统
 
 软件开发中，数据库设计
+
 - 分析需求：分析业务需求和需要处理的数据库的需求
 - 概要设计：设计关系图、E-R 图
 
 设计数据库的步骤（个人博客）：
+
 - 收集信息，分析需求
-    - 用户表（用户登录，个人信息，写博客，创建分类）
-    - 分类表（文章分类，创建者）
-    - 文章表（文章的信息）
-    - 友链表（友链信息）
-    - 自定义表（系统信息，某个关键字，或者一些主字段）
+  - 用户表（用户登录，个人信息，写博客，创建分类）
+  - 分类表（文章分类，创建者）
+  - 文章表（文章的信息）
+  - 友链表（友链信息）
+  - 自定义表（系统信息，某个关键字，或者一些主字段）
 - 标识实体
 - 标识实体之间的关系
-    - 多个实体之间的关系
-    - 没有关联的表
+  - 多个实体之间的关系
+  - 没有关联的表
 
 场景举例：粉丝查询
+
 - 查询粉丝的数量
 - 查询粉丝的具体用户 ID
 
@@ -1327,32 +1350,36 @@ mysql -uroot -pxxxx school < dump.sql
 | `follow_id` | int  | 关注者   |
 
 PS：可以使用一些前端框架，整合数据库和后端：
+
 - Ant Design Pro
 - ElementUI
 
-## 9.2 三大范式
+### 9.2 三大范式
 
 为什么需要数据规范化？
+
 - 信息重复
 - 更新异常
 - 插入异常
-    - 无法正常显示信息
+  - 无法正常显示信息
 - 删除异常
-    - 丢失有效信息
+  - 丢失有效信息
 
 三大范式：
+
 - 第一范式（1NF）：每一列都是原子项（字段不可再分）
 - 第二范式（2NF）：在第一范式的基础上消除非主属性对主码的部分函数依赖（每张表只做一件事情）
 - 第三范式（3NF）：在第二范式基础上消除传递依赖（数据表中的每一列数据都和主键直接相关）
 
 规范不是越高越好：
+
 - 成本和用户体验问题，性能往往更重要
 - 阿里规范：关联查询不得超过三张表
 - 故意给一些表增加冗余字段（可以避免多表查询）
 
-# 10. JDBC
+## 10. JDBC
 
-## 10.1 数据库驱动
+### 10.1 数据库驱动
 
 Sun 公司为了简化数据库的开发操作，提供了一个 Java 操作数据库的规范，称为 JDBC，这些规范由具体的数据局厂商去实现。
 
@@ -1360,7 +1387,7 @@ Sun 公司为了简化数据库的开发操作，提供了一个 Java 操作数�
 
 除了需要 JDBC 的包，我们还需要 MySQL 数据库驱动包：`mysql-connector-java-5.1.47.jar`。
 
-## 10.2 第一个 JDBC 程序
+### 10.2 第一个 JDBC 程序
 
 我们首先创建一个数据库：
 
@@ -1384,6 +1411,7 @@ INSERT INTO users VALUES
 ```
 
 按照如下的步骤创建 JDBC 项目：
+
 1. 创建一个 Java 项目
 2. 复制数据库驱动 `.jar` 包到 `@/lib/` 文件夹下，然后导入到库
 3. 编写代码测试
@@ -1445,7 +1473,6 @@ conn.setAutoCommit(false);
 | `stmt.executeUpdate()` | 更新、插入或删除操作，返回受到影响的行数 |
 | `stmt.executeBatch()`  | 执行多个 SQL                             |
 
-
 结果集对象：
 
 | 方法             |
@@ -1457,7 +1484,7 @@ conn.setAutoCommit(false);
 | `rs.getDate()`   |
 | `rs.getString()` |
 
-## 10.3 封装 JDBC 连接
+### 10.3 封装 JDBC 连接
 
 新建 `db.properties` 文件：
 
@@ -1564,7 +1591,7 @@ public class Test {
 }
 ```
 
-## 10.4 解决 SQL 注入问题
+### 10.4 解决 SQL 注入问题
 
 `PreparedStatement` 可以防止 SQL 注入，并且拥有更高的效率。
 
@@ -1600,7 +1627,7 @@ public class Test {
 }
 ```
 
-## 10.5 JDBC 事务
+### 10.5 JDBC 事务
 
 JDBC 实现事务：
 
@@ -1638,9 +1665,10 @@ public class Test {
 
 如果不写 `conn.rollback();` 事务也会被回滚。
 
-## 10.6 数据库连接池
+### 10.6 数据库连接池
 
 原始的数据库连接过程：
+
 1. 建立数据库连接
 2. 执行完毕
 3. 释放
@@ -1648,6 +1676,7 @@ public class Test {
 连接 —— 释放过程十分浪费时间。池化技术是准备一些预先的资源，过来就连接预先准备好的。
 
 几个常用值：
+
 - 常用连接数
 - 最小连接数
 - 最大连接数
@@ -1658,15 +1687,17 @@ public class Test {
 如果需要编写连接池，需要实现 `DataSource` 接口。
 
 常见的开源数据源实现：
+
 - DBCP
 - C3P0
 - Druid
 
 使用了数据库连接池之后，我们就不需要编写连接数据库的代码。
 
-## 10.7 DBCP 连接池
+### 10.7 DBCP 连接池
 
 需要下面的 `.jar` 包支持：
+
 - `commons-dbcp-1.4.jar`
 - `commons-pool-1.6.jar`
 
@@ -1704,5 +1735,6 @@ public class JdbcUtilsDBCP {
 C3P0 类似，可以参考文档进行实现。
 
 后续可以学习：
+
 - Druid
 - Apache 项目的其他软件

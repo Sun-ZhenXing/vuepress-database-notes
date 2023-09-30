@@ -1,8 +1,3 @@
----
-title: UUID 相关函数
-description: UUID 相关函数
----
-
 # UUID
 
 [[TOC]]
@@ -24,6 +19,7 @@ SELECT UUID_SHORT();
 ## 2. MySQL 8.0 新特性
 
 MySQL 8.0 支持新的函数：
+
 - `UUID_TO_BIN()`
 - `BIN_TO_UUID()`
 - `IS_UUID()`
@@ -50,7 +46,7 @@ SELECT IS_UUID('{12345678-1234-5678-1234-567812345678}') AS A,
 
 结果：
 
-```log
+```console
 +------+------+------+
 | A    | B    | C    |
 +------+------+------+

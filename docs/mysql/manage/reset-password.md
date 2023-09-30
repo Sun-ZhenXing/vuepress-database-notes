@@ -1,8 +1,3 @@
----
-title: 重置 MySQL 密码
-description: 不同版本的 MySQL 修改密码方法
----
-
 # 重置 MySQL 密码
 
 ::: info 版本帮助
@@ -47,7 +42,7 @@ mysql.server stop
 
 :::
 
-### 1.2 以安全模式启动 MySQL：
+### 1.2 以安全模式启动 MySQL
 
 ```bash
 mysqld_safe --skip-grant-tables &
@@ -126,7 +121,7 @@ mysql.server start
 
 ### 2.1 修改配置文件
 
-修改前关闭 MySQL 服务，可参考 [上一节](#_1-1-关闭-mysql-服务)。
+修改前关闭 MySQL 服务，可参考 [上一节](#11-关闭-mysql-服务)。
 
 修改 `my.cnf`（可能是 `/etc/my.cnf` 或 `/etc/mysql/my.cnf`），在 `[mysqld]` 后添加 `skip-grant-tables`。
 
@@ -172,7 +167,7 @@ mysql.server restart
 mysql -u root
 ```
 
-下面跳转到 [执行 SQL 语句](#_1-3-执行-sql-语句)，执行上述 SQL。
+下面跳转到 [执行 SQL 语句](#13-执行-sql-语句)，执行上述 SQL。
 
 ### 2.4 修改回原配置
 

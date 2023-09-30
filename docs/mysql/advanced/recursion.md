@@ -1,8 +1,3 @@
----
-title: 递归查询
-description: 递归查询
----
-
 # MySQL 8.0+ 递归查询
 
 [[TOC]]

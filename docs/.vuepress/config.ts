@@ -1,9 +1,16 @@
+import process from 'node:process'
+import { getDirname, path } from '@vuepress/utils'
 import { defineUserConfig, defaultTheme } from 'vuepress'
 import { mdEnhancePlugin } from 'vuepress-plugin-md-enhance'
 import { copyCodePlugin } from 'vuepress-plugin-copy-code2'
 import { searchProPlugin } from 'vuepress-plugin-search-pro'
 import { autoCatalogPlugin } from 'vuepress-plugin-auto-catalog'
+import { shikiPlugin } from '@vuepress/plugin-shiki'
 
+const __dirname = getDirname(import.meta.url)
+const isProd = process.env.NODE_ENV === 'production'
+const ROOT_PATH = path.resolve(__dirname, '../..')
+const CURRENT_PATH = path.resolve(__dirname, '.')
 const USER_NAME = 'Sun-ZhenXing'
 const BASE_PATH = '/vuepress-database-notes/'
 
@@ -12,32 +19,66 @@ export default defineUserConfig({
   title: '数据库笔记合集',
   description: '各种数据库和 SQL 笔记',
   head: [
-    ['link', { rel: 'icon', href: `${BASE_PATH}favicon.svg` }]
+    ['link', { rel: 'icon', href: `${BASE_PATH}favicon.svg` }],
   ],
   base: BASE_PATH,
   markdown: {
     code: {
-      lineNumbers: 10
-    }
+      lineNumbers: 10,
+    },
+    importCode: {
+      handleImportPath: str => str
+        .replace(/^\//, ROOT_PATH.replace(/(?:|\\|\/)$/, '/'))
+        .replace(/^@/, CURRENT_PATH),
+    },
   },
   theme: defaultTheme({
     logo: '/favicon.svg',
     repo: `${USER_NAME}${BASE_PATH}`,
     docsDir: 'docs',
+    selectLanguageName: '简体中文',
+    selectLanguageText: '选择语言',
+    selectLanguageAriaLabel: '选择语言',
     editLinkText: '在 GitHub 上编辑此页',
     contributorsText: '贡献者',
     lastUpdatedText: '上次更新',
-    navbar: [],
+    openInNewWindow: '在新窗口打开',
+    toggleColorMode: '切换颜色模式',
+    toggleSidebar: '切换侧边栏',
+    tip: '提示',
+    warning: '注意',
+    danger: '警告',
+    notFound: [
+      '这里什么都没有',
+      '我们怎么到这来了？',
+      '这是一个 404 页面',
+      '看起来我们进入了错误的链接',
+    ],
+    backToHome: '返回首页',
+    navbar: [
+    ],
     sidebar: 'auto',
+    themePlugins: {
+      git: isProd,
+    },
   }),
   plugins: [
     mdEnhancePlugin({
       gfm: true,
       container: true,
-      linkCheck: true,
       vPre: true,
       tabs: true,
+      card: true,
       codetabs: true,
+      include: {
+        resolvePath: (file) => {
+          if (file.startsWith('@'))
+            return file.replace('@', CURRENT_PATH)
+          if (file.startsWith('/'))
+            return file.replace(/^\//, ROOT_PATH.replace(/(?:|\\|\/)$/, '/'))
+          return file
+        },
+      },
       align: true,
       attrs: true,
       sub: true,
@@ -46,29 +87,39 @@ export default defineUserConfig({
       mark: true,
       imgLazyload: true,
       tasklist: true,
-      katex: true,
+      linkify: false,
+      katex: {
+        copy: true,
+      },
       mermaid: true,
       delay: 200,
+      playground: {
+        presets: ['ts'],
+      },
       stylize: [
         {
           matcher: '@def',
           replacer: ({ tag }) => {
-            if (tag === 'em') return {
-              tag: 'Badge',
-              attrs: { type: 'tip' },
-              content: '定义'
+            if (tag === 'em') {
+              return {
+                tag: 'Badge',
+                attrs: { type: 'tip' },
+                content: '定义',
+              }
             }
-          }
+          },
         },
         {
           matcher: /@note:.+/,
           replacer: ({ tag, content }) => {
-            if (tag === 'em') return {
-              tag: 'Badge',
-              attrs: { type: 'warning' },
-              content: content.substring(6)
+            if (tag === 'em') {
+              return {
+                tag: 'Badge',
+                attrs: { type: 'warning' },
+                content: content.substring(6),
+              }
             }
-          }
+          },
         },
         {
           matcher: '@TODO',
@@ -79,13 +130,29 @@ export default defineUserConfig({
               content: 'TODO'
             }
           }
-        }
-      ]
+        },
+      ],
     }, false),
     searchProPlugin({}),
-    autoCatalogPlugin({}),
+    autoCatalogPlugin({
+      orderGetter: ({ title, routeMeta }) => {
+        if (routeMeta.order)
+          return routeMeta.order as number
+        const prefix = title.match(/^\d+. /)
+        if (prefix)
+          return Number.parseInt(prefix[0])
+        const suffix = title.match(/\d+$/)
+        if (suffix)
+          return Number.parseInt(suffix[0])
+        return 0
+      },
+    }),
     copyCodePlugin({
-      showInMobile: true
-    })
-  ]
+      showInMobile: true,
+    }),
+    shikiPlugin({ theme: 'dark-plus' }),
+  ],
+  alias: {
+    '@': CURRENT_PATH,
+  },
 })

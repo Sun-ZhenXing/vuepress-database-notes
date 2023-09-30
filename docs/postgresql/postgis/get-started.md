@@ -1,8 +1,3 @@
----
-title: PostGIS 入门
-description: PostGIS 入门
----
-
 # PostGIS 入门
 
 [[TOC]]
@@ -16,7 +11,6 @@ docker pull postgis/postgis:14-3.3-alpine
 ```
 
 测试 PostgreSQL 安装的 PostGIS 插件版本：
-
 
 ```sql
 SELECT postgis_full_version();
