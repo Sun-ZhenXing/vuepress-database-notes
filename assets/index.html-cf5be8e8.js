@@ -1,0 +1,1 @@
+import{_ as o,r as a,o as s,c as n,a as c,b as e,d as r}from"./app-f357348a.js";const d={},_=e("h1",{id:"postgis-笔记",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#postgis-笔记","aria-hidden":"true"},"#"),r(" PostGIS 笔记")],-1);function i(l,h){const t=a("AutoCatalog");return s(),n("div",null,[_,c(t)])}const m=o(d,[["render",i],["__file","index.html.vue"]]);export{m as default};

@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-004faac2","path":"/postgresql/","title":"PostgreSQL 笔记","lang":"zh-CN","frontmatter":{"title":"PostgreSQL 笔记","description":"PostgreSQL 笔记"},"headers":[],"git":{"updatedTime":1678693108000,"contributors":[{"name":"Sun-ZhenXing","email":"1006925066@qq.com","commits":1}]},"filePathRelative":"postgresql/index.md","excerpt":""}');export{e as data};
