@@ -1,0 +1,1 @@
+import{_ as a,r as t,o as n,c,a as r,b as e,d as s}from"./app-Y4KcrCk8.js";const d={},_=e("h1",{id:"mongodb-笔记",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#mongodb-笔记","aria-hidden":"true"},"#"),s(" MongoDB 笔记")],-1);function l(i,m){const o=t("AutoCatalog");return n(),c("div",null,[_,r(o)])}const f=a(d,[["render",l],["__file","index.html.vue"]]);export{f as default};
