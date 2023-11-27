@@ -1,16 +1,36 @@
-# 数据库笔记
+# VuePress Database Notes
 
-![](https://img.shields.io/github/actions/workflow/status/Sun-ZhenXing/vuepress-database-notes/deploy-docs.yml?branch=main)
+![actions status](https://img.shields.io/github/actions/workflow/status/Sun-ZhenXing/vuepress-database-notes/deploy-docs.yml?branch=main)
 
-在线地址：<https://blog.alexsun.top/vuepress-database-notes/>
+🌐 [中文文档](./README.zh.md) | 🚀 [Online Reading (Chinese)](https://blog.alexsun.top/vuepress-database-notes/)
 
-## 构建文档
+## 📖 Introduction
+
+Database notes.
+
+It is recommended to install the [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) plugin to format the MarkDown file.
+
+## 🛠️ Build Docs
+
+Build with `pnpm`, the content will be generated in `docs/.vuepress/dist`:
 
 ```bash
 pnpm i
 pnpm build
 ```
 
-## 开源协议 | License
+Build with Docker:
 
-请阅读 <https://github.com/Sun-ZhenXing/Sun-ZhenXing.github.io#%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE> 了解有关的代码限制条款。上述地址内的协议内容适用于本仓库，如需要引用请遵循上述条款。
+```bash
+docker build -t vuepress-database-notes .
+docker run -itd -p 80:80 vuepress-database-notes
+```
+
+Now you can visit <http://localhost> to see your docs.
+
+## 📜 License
+
+- All files except `/docs/*` are licensed under [MIT License](https://mit-license.org/)
+- `/docs/*` are licensed under [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+For more details, please read [this series of documents license](https://github.com/Sun-ZhenXing/Sun-ZhenXing.github.io#%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE).

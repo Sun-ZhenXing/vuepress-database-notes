@@ -6,6 +6,7 @@ import { copyCodePlugin } from 'vuepress-plugin-copy-code2'
 import { searchProPlugin } from 'vuepress-plugin-search-pro'
 import { autoCatalogPlugin } from 'vuepress-plugin-auto-catalog'
 import { shikiPlugin } from '@vuepress/plugin-shiki'
+import { slug as slugify } from 'github-slugger'
 
 const __dirname = getDirname(import.meta.url)
 const isProd = process.env.NODE_ENV === 'production'
@@ -29,7 +30,11 @@ export default defineUserConfig({
     importCode: {
       handleImportPath: str => str
         .replace(/^\//, ROOT_PATH.replace(/(?:|\\|\/)$/, '/'))
-        .replace(/^@/, CURRENT_PATH),
+        .replace(/^@\//, CURRENT_PATH.replace(/(?:|\\|\/)$/, '/')),
+    },
+    anchor: {
+      level: [1, 2, 3, 4, 5, 6],
+      slugify,
     },
   },
   theme: defaultTheme({
@@ -68,12 +73,11 @@ export default defineUserConfig({
       container: true,
       vPre: true,
       tabs: true,
-      card: true,
       codetabs: true,
       include: {
-        resolvePath: (file) => {
-          if (file.startsWith('@'))
-            return file.replace('@', CURRENT_PATH)
+        resolvePath: file => {
+          if (file.startsWith('@/'))
+            return file.replace(/^@\//, CURRENT_PATH)
           if (file.startsWith('/'))
             return file.replace(/^\//, ROOT_PATH.replace(/(?:|\\|\/)$/, '/'))
           return file
@@ -93,9 +97,6 @@ export default defineUserConfig({
       },
       mermaid: true,
       delay: 200,
-      playground: {
-        presets: ['ts'],
-      },
       stylize: [
         {
           matcher: '@def',
@@ -136,14 +137,20 @@ export default defineUserConfig({
     searchProPlugin({}),
     autoCatalogPlugin({
       orderGetter: ({ title, routeMeta }) => {
+        const BASE = 100000
         if (routeMeta.order)
           return routeMeta.order as number
-        const prefix = title.match(/^\d+. /)
-        if (prefix)
-          return Number.parseInt(prefix[0])
+        const level2 = title.match(/^(\d+)\.(\d+)/)
+        if (level2)
+          return BASE + Number.parseInt(level2[1]) * 1000 + Number.parseInt(level2[2])
+        const level1 = title.match(/^(\d+)\./)
+        if (level1)
+          return BASE + Number.parseInt(level1[1]) * 1000
         const suffix = title.match(/\d+$/)
         if (suffix)
-          return Number.parseInt(suffix[0])
+          return BASE + Number.parseInt(suffix[0]) * 1000
+        if (title)
+          return BASE + title.charCodeAt(0) * 1000 + (title.charCodeAt(1) || 0)
         return 0
       },
     }),
